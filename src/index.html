@@ -46,25 +46,6 @@
 			}
 			
 		});
-
-		socket.on('clean', function (data) {
-			console.log('cleaning for ' + data.source);
-			cleanBlock(data.source);
-		});
-
-		var cleanBlock = function (data) {
-			$('#' + data).html('');
-		};
-
-		var addPost = function (data) {
-			var source = data.title[0];
-			var url = data.link[0];
-			var excerpt = data.description[0];
-			console.log('appending ' + source);
-			$('body').append('<div>' + source + '</div>')
-		};
-	  
-	
 	 
 	</script>
 		
