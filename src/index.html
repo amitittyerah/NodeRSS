@@ -1,0 +1,75 @@
+<html>
+	<head>
+	<style type="text/css">
+		body {
+			padding: 20px;
+		}
+		.block {
+			float: left;
+			padding: 10px;
+			width: 40%;
+			height: 300px;
+			margin-bottom: 30px;
+		}
+		.cblock {
+			overflow: scroll;
+			height: 100%;
+		}
+		.link {
+			display: block;
+			padding: 3px 2px 3px 2px;
+			background: #E8E8E8;
+			border: 1px solid #A7A7A7;
+		}
+
+	</style>
+	<script src="http://localhost:7777/socket.io/socket.io.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<script>
+		var socket = io.connect('http://localhost:7777');
+
+
+		socket.on('new-post',function (data) {
+			if($('#'+data.src).length === 0)
+			{
+				$('body').append('<div class="block" id="' + data.src + '"><h3>' + data.src + '</h3><p class=" cblock c' + data.src + '"></p></div>');
+			}
+			else
+			{
+				$('.c' + data.src).html('');
+			}
+			for(var i = 0 ; i < data.data.length ; i++)
+			{
+				var item = data.data[i];
+				var link = '<a class="link" href="' + item.link[0] + '">' + item.title[0] + '</a>';
+				$('.c' + data.src).append(link);
+			}
+			
+		});
+
+		socket.on('clean', function (data) {
+			console.log('cleaning for ' + data.source);
+			cleanBlock(data.source);
+		});
+
+		var cleanBlock = function (data) {
+			$('#' + data).html('');
+		};
+
+		var addPost = function (data) {
+			var source = data.title[0];
+			var url = data.link[0];
+			var excerpt = data.description[0];
+			console.log('appending ' + source);
+			$('body').append('<div>' + source + '</div>')
+		};
+	  
+	
+	 
+	</script>
+		
+	</head>
+	<body>
+		
+	</body>
+</html>

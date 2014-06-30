@@ -1,0 +1,12 @@
+{
+    "name": "NodeRSS",
+    "version": "0.0.0",
+    "description": "Real time web rss",
+    "dependencies": {
+        "socket.io": "latest",
+        "express": "latest",
+        "xml2js": "latest",
+        "request": "latest"
+    },
+    "author": "devscoop"
+}
