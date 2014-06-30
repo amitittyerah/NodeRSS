@@ -2,6 +2,7 @@ var app = require('http').createServer(handler)
 var io = require('socket.io').listen(app)
 var fs = require('fs')
 var request = require('request');
+var parseString = require('xml2js').parseString;
 
 app.listen(7777, '127.0.0.1');
 
